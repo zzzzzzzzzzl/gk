@@ -5,17 +5,7 @@
   <button type="button" (click)="submitForm()">查询</button>
 </form>
 
-<router-outlet></router-outlet>
-
 <div id="results"></div>
 
-<div *ngIf="selectedQuery === 'school'">
-  <div id="school">
-
-</div><!-- 查询学校组件的 HTML 内容 --></div>
-
-<div *ngIf="selectedQuery === 'major'">
-  <div id="sennmonn">
-
-</div><!-- 查询专业组件的 HTML 内容 --></div>
-<!-- genggai -->
+<a routerLink="/meniu" >地区一览</a>
+<router-outlet></router-outlet>
