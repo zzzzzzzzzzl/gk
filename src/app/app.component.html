@@ -1,11 +1,18 @@
-<h1>查询表格</h1>
+<!-- <h1>查询表格</h1>
 <form id="queryForm">
   <label for="id">ID:</label>
   <input type="text" id="id" name="id">
   <button type="button" (click)="submitForm()">查询</button>
-</form>
+</form> -->
 
 <div id="results"></div>
 
-<a routerLink="/meniu" >地区一览</a>
-<router-outlet></router-outlet>
+<div class="menu-container">
+  <a routerLink="/meniu" class="menu-button">信息</a>
+  <a routerLink="/gao-kao" class="menu-button">分数匹配</a>
+  <a routerLink="/chaxun" class="menu-button">学校查询</a>
+</div>
+
+<div class="content-container">
+  <router-outlet></router-outlet>
+</div>

@@ -26,6 +26,7 @@ connection.connect((error) => {
   console.log('成功连接到数据库！');
 });
 
+
 // 设置路由和处理程序
 app.get('/api/data', (req, res) => {
   const id = req.query.id; // 从请求参数中获取ID值
@@ -35,6 +36,20 @@ app.get('/api/data', (req, res) => {
     console.log("results",results);
     if (error) {
       console.error('查询数据库失败：', error);
+      res.status(500).json({ error: '数据库查询错误' });
+      return;
+    }
+    res.json(results);
+  });
+});
+
+// 添加查询 "school" 表的路由
+app.get('/api/schools', (req, res) => {
+  // 执行数据库查询
+  connection.query('SELECT * FROM school', (error, results) => {
+    console.log("school results", results);
+    if (error) {
+      console.error('查询 "school" 表失败：', error);
       res.status(500).json({ error: '数据库查询错误' });
       return;
     }

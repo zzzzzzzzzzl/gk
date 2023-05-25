@@ -1,15 +1,17 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
+import { gaokaoComponent } from './gao-kao/gao-kao.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { GaoKaoComponent } from './gao-kao/gao-kao.component';
 import { MessagesComponent } from './messages/messages.component';
-import { SchooComponent } from './schoo/schoo.component';
-import { ZhuanyeComponent } from './zhuanye/zhuanye.component';
 import { MeniuComponent } from './meniu/meniu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { Router, NavigationEnd } from '@angular/router';
+import { AppComponent } from './app.component';
+import { ChaxunComponent } from './chaxun/chaxun.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 
@@ -19,16 +21,16 @@ import { Router, NavigationEnd } from '@angular/router';
     BrowserModule,
     RouterModule,
     AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
     declarations: [
     AppComponent,
+    gaokaoComponent,
     DashboardComponent,
-    GaoKaoComponent,
     MessagesComponent,
-    SchooComponent,
-    ZhuanyeComponent,
     MeniuComponent,
-    GaoKaoComponent,
+    ChaxunComponent,
   ],
 
 
