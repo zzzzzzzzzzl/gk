@@ -1,3 +1,4 @@
+// server.js
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
@@ -43,19 +44,66 @@ app.get('/api/data', (req, res) => {
   });
 });
 
-// 添加查询 "school" 表的路由
-app.get('/api/schools', (req, res) => {
+app.get('/api/filteredSchools', (req, res) => {
+  const selectedProvince = req.query.province || '';
+  const selectedEducationType = req.query.educationType || '';
+  const selected985211 = req.query['985211'] || '';
+  const page = parseInt(req.query.page) || 1;
+  const pageSize = parseInt(req.query.pageSize) || 50;
+
+  // 构建 SQL 查询语句和参数
+  let sql = 'SELECT * FROM school WHERE 1=1';
+  let params = [];
+
+  if (selectedProvince) {
+    sql += ' AND province = ?';
+    params.push(selectedProvince);
+  }
+  if (selectedEducationType) {
+    sql += ' AND education_type = ?';
+    params.push(selectedEducationType);
+  }
+  if (selected985211) {
+    sql += ' AND (is_985 = ? OR is_211 = ?)';
+    params.push(selected985211 === '985' ? 1 : 0);
+    params.push(selected985211 === '211' ? 1 : 0);
+  }
+
+  // 计算偏移量
+  const offset = (page - 1) * pageSize;
+
   // 执行数据库查询
-  connection.query('SELECT * FROM school', (error, results) => {
-    console.log("school results", results);
+  connection.query(`${sql} LIMIT ?, ?`, [...params, offset, pageSize], (error, results) => {
     if (error) {
-      console.error('查询 "school" 表失败：', error);
+      console.error('查询 "filteredSchools" 表失败：', error);
       res.status(500).json({ error: '数据库查询错误' });
       return;
     }
     res.json(results);
   });
 });
+
+app.get('/api/schools', (req, res) => {
+  // 执行数据库查询
+  connection.query('SELECT * FROM school', (error, results) => {
+    if (error) {
+      console.error('查询 "schools" 表失败：', error);
+      res.status(500).json({ error: '数据库查询错误' });
+      return;
+    }
+    res.json(results);
+  });
+});
+
+
+app.get('/api/provinces', (req, res) => {
+  // 执行数据库查询或其他操作来获取省份列表
+  const provinces = ['山东', '山西', '河北']; // 用实际的省份数据替换这里的示例数据
+
+  // 将省份列表作为JSON响应发送回客户端
+  res.json(provinces);
+});
+
 
 // 启动服务器
 app.listen(3000, () => {
