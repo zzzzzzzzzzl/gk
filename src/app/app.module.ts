@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { ChaxunComponent } from './chaxun/chaxun.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { XxZyComponent } from './xx-zy/xx-zy.component';
 
 
 
@@ -31,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     MessagesComponent,
     MeniuComponent,
     ChaxunComponent,
+    XxZyComponent,
   ],
 
 
