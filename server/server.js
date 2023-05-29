@@ -105,6 +105,93 @@ app.get('/api/provinces', (req, res) => {
 });
 
 
+// 在 server.js 文件中添加以下代码
+app.get('/unique-values', (req, res) => {
+  const column = req.query.column;
+  const query = `SELECT DISTINCT ${column} FROM your_table_name`;
+  connection.query(query, (error, results) => {
+    if (error) {
+      console.error('获取唯一值失败：', error);
+      res.status(500).json({ error: '获取唯一值失败' });
+    } else {
+      const values = results.map(result => result[column]);
+      res.json(values);
+    }
+  });
+});
+
+// 在 server.js 文件中添加以下代码
+app.get('/filtered-schools', (req, res) => {
+  const { xuankeYaoqiu, province, city, zhuanyeLeibie, tuitionLessThan8000 } = req.query;
+
+  let query = 'SELECT * FROM chaxun WHERE 1=1';
+
+  if (xuankeYaoqiu) {
+    query += ` AND Axuankeyaoqiu = '${xuankeYaoqiu}'`;
+  }
+
+  if (province) {
+    query += ` AND Ashengfen = '${province}'`;
+  }
+
+  if (city) {
+    query += ` AND Acity = '${city}'`;
+  }
+
+  if (zhuanyeLeibie) {
+    query += ` AND Azhuanyeleibie = '${zhuanyeLeibie}'`;
+  }
+
+  if (tuitionLessThan8000) {
+    query += ' AND Axuefei < 8000';
+  }
+
+  connection.query(query, (error, results) => {
+    if (error) {
+      console.error('查询数据失败：', error);
+      res.status(500).json({ error: '查询数据失败' });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+app.get('/api/filteredchaxun', (req, res) => {
+  const { xuankeYaoqiu, province, city, zhuanyeLeibie, tuitionLessThan8000 } = req.query;
+
+  let query = 'SELECT * FROM chaxun WHERE 1=1';
+
+  if (xuankeYaoqiu) {
+    query += ` AND Axuankeyaoqiu = '${xuankeYaoqiu}'`;
+  }
+
+  if (province) {
+    query += ` AND Ashengfen = '${province}'`;
+  }
+
+  if (city) {
+    query += ` AND Acity = '${city}'`;
+  }
+
+  if (zhuanyeLeibie) {
+    query += ` AND Azhuanyeleibie = '${zhuanyeLeibie}'`;
+  }
+
+  if (tuitionLessThan8000) {
+    query += ' AND Axuefei < 8000';
+  }
+
+  connection.query(query, (error, results) => {
+    if (error) {
+      console.error('查询数据失败：', error);
+      res.status(500).json({ error: '查询数据失败' });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+
 // 启动服务器
 app.listen(3000, () => {
   console.log('Node.js服务器已启动，监听端口3000！');

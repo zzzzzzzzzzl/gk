@@ -12,6 +12,7 @@ import { ChaxunComponent } from './chaxun/chaxun.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { XxZyComponent } from './xx-zy/xx-zy.component';
+import { Gk2022Component } from './gk2022/gk2022.component';
 
 
 
@@ -33,6 +34,7 @@ import { XxZyComponent } from './xx-zy/xx-zy.component';
     MeniuComponent,
     ChaxunComponent,
     XxZyComponent,
+    Gk2022Component,
   ],
 
 
