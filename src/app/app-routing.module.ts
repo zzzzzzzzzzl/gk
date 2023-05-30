@@ -5,6 +5,9 @@ import { gaokaoComponent } from './gao-kao/gao-kao.component';
 import { ChaxunComponent } from './chaxun/chaxun.component';
 import { XxZyComponent } from './xx-zy/xx-zy.component';
 import { Gk2022Component } from './gk2022/gk2022.component';
+import { UiScrollModule } from 'ngx-ui-scroll';
+import { FormsModule } from '@angular/forms';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 const routes: Routes = [
   { path:'meniu',component:MeniuComponent },
@@ -19,7 +22,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ RouterModule.forRoot(routes),UiScrollModule,ScrollingModule,
+    FormsModule],
+
   exports: [ RouterModule ]
 
 
