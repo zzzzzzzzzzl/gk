@@ -108,7 +108,7 @@ app.get('/api/provinces', (req, res) => {
 // 在 server.js 文件中添加以下代码
 app.get('/unique-values', (req, res) => {
   const column = req.query.column;
-  const query = `SELECT DISTINCT ${column} FROM your_table_name`;
+  const query = `SELECT DISTINCT ${column} FROM chaxun`;
   connection.query(query, (error, results) => {
     if (error) {
       console.error('获取唯一值失败：', error);
@@ -120,76 +120,76 @@ app.get('/unique-values', (req, res) => {
   });
 });
 
-// 在 server.js 文件中添加以下代码
-app.get('/filtered-schools', (req, res) => {
-  const { xuankeYaoqiu, province, city, zhuanyeLeibie, tuitionLessThan8000 } = req.query;
+// // 在 server.js 文件中添加以下代码
+// app.get('/filtered-schools', (req, res) => {
+//   const { xuankeYaoqiu, province, city, zhuanyeLeibie, tuitionLessThan8000 } = req.query;
 
-  let query = 'SELECT * FROM chaxun WHERE 1=1';
+//   let query = 'SELECT * FROM chaxun WHERE 1=1';
 
-  if (xuankeYaoqiu) {
-    query += ` AND Axuankeyaoqiu = '${xuankeYaoqiu}'`;
-  }
+//   if (xuankeYaoqiu) {
+//     query += ` AND Axuankeyaoqiu = '${xuankeYaoqiu}'`;
+//   }
 
-  if (province) {
-    query += ` AND Ashengfen = '${province}'`;
-  }
+//   if (province) {
+//     query += ` AND Ashengfen = '${province}'`;
+//   }
 
-  if (city) {
-    query += ` AND Acity = '${city}'`;
-  }
+//   if (city) {
+//     query += ` AND Acity = '${city}'`;
+//   }
 
-  if (zhuanyeLeibie) {
-    query += ` AND Azhuanyeleibie = '${zhuanyeLeibie}'`;
-  }
+//   if (zhuanyeLeibie) {
+//     query += ` AND Azhuanyeleibie = '${zhuanyeLeibie}'`;
+//   }
 
-  if (tuitionLessThan8000) {
-    query += ' AND Axuefei < 8000';
-  }
+//   if (tuitionLessThan8000) {
+//     query += ' AND Axuefei < 8000';
+//   }
 
-  connection.query(query, (error, results) => {
-    if (error) {
-      console.error('查询数据失败：', error);
-      res.status(500).json({ error: '查询数据失败' });
-    } else {
-      res.json(results);
-    }
-  });
-});
+//   connection.query(query, (error, results) => {
+//     if (error) {
+//       console.error('查询数据失败：', error);
+//       res.status(500).json({ error: '查询数据失败' });
+//     } else {
+//       res.json(results);
+//     }
+//   });
+// });
 
-app.get('/api/filteredchaxun', (req, res) => {
-  const { xuankeYaoqiu, province, city, zhuanyeLeibie, tuitionLessThan8000 } = req.query;
+// app.get('/api/filteredchaxun', (req, res) => {
+//   const { xuankeYaoqiu, province, city, zhuanyeLeibie, tuitionLessThan8000 } = req.query;
 
-  let query = 'SELECT * FROM chaxun WHERE 1=1';
+//   let query = 'SELECT * FROM chaxun WHERE 1=1';
 
-  if (xuankeYaoqiu) {
-    query += ` AND Axuankeyaoqiu = '${xuankeYaoqiu}'`;
-  }
+//   if (xuankeYaoqiu) {
+//     query += ` AND Axuankeyaoqiu = '${xuankeYaoqiu}'`;
+//   }
 
-  if (province) {
-    query += ` AND Ashengfen = '${province}'`;
-  }
+//   if (province) {
+//     query += ` AND Ashengfen = '${province}'`;
+//   }
 
-  if (city) {
-    query += ` AND Acity = '${city}'`;
-  }
+//   if (city) {
+//     query += ` AND Acity = '${city}'`;
+//   }
 
-  if (zhuanyeLeibie) {
-    query += ` AND Azhuanyeleibie = '${zhuanyeLeibie}'`;
-  }
+//   if (zhuanyeLeibie) {
+//     query += ` AND Azhuanyeleibie = '${zhuanyeLeibie}'`;
+//   }
 
-  if (tuitionLessThan8000) {
-    query += ' AND Axuefei < 8000';
-  }
+//   if (tuitionLessThan8000) {
+//     query += ' AND Axuefei < 8000';
+//   }
 
-  connection.query(query, (error, results) => {
-    if (error) {
-      console.error('查询数据失败：', error);
-      res.status(500).json({ error: '查询数据失败' });
-    } else {
-      res.json(results);
-    }
-  });
-});
+//   connection.query(query, (error, results) => {
+//     if (error) {
+//       console.error('查询数据失败：', error);
+//       res.status(500).json({ error: '查询数据失败' });
+//     } else {
+//       res.json(results);
+//     }
+//   });
+// });
 
 
 
@@ -197,3 +197,68 @@ app.get('/api/filteredchaxun', (req, res) => {
 app.listen(3000, () => {
   console.log('Node.js服务器已启动，监听端口3000！');
 });
+
+app.get('/api/table-data', (req, res) => {
+  const tableName = req.query.tableName;
+
+  connection.query(`SELECT * FROM ${tableName}`, (error, results) => {
+    if (error) {
+      console.error(`查询 "${tableName}" 表失败：`, error);
+      res.status(500).json({ error: '数据库查询错误' });
+      return;
+    }
+
+    const tableData = [];
+    for (let i = 0; i < results.length; i++) {
+      const row = results[i];
+      const rowData = [];
+      for (const column in row) {
+        rowData.push(row[column]);
+      }
+      tableData.push(rowData);
+    }
+
+    res.json(tableData);
+  });
+
+    }
+
+
+    );
+
+  app.get('/api/filtered-chaxun', (req, res) => {
+    const { xuankeYaoqiu, province, city, zhuanyeLeibie, tuitionLessThan8000 } = req.query;
+
+    let query = 'SELECT * FROM chaxun WHERE 1=1';
+
+    if (xuankeYaoqiu) {
+      query += ` AND Axuankeyaoqiu = '${xuankeYaoqiu}'`;
+    }
+
+    if (province) {
+      query += ` AND Ashengfen = '${province}'`;
+    }
+
+    if (city) {
+      query += ` AND Acity = '${city}'`;
+    }
+
+    if (zhuanyeLeibie) {
+      query += ` AND Azhuanyeleibie = '${zhuanyeLeibie}'`;
+    }
+
+    if (tuitionLessThan8000) {
+      query += ' AND Axuefei < 8000';
+    }
+
+    connection.query(query, (error, results) => {
+      if (error) {
+        console.error('查询数据失败：', error);
+        res.status(500).json({ error: '查询数据失败' });
+      } else {
+        res.json(results);
+      };
+
+});
+
+  })
