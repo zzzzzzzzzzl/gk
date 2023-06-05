@@ -8,22 +8,21 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./gk2022.component.css']
 })
 export class Gk2022Component implements OnInit {
-  constructor(private http: HttpClient) {}
+  combinedColumns: any[] = [];
 
-  mergedColumns: string[] = [];
-  combinedColumns: string[] = [];
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.getCombinedColumns();
+    this.fetchCombinedColumns();
   }
 
-  getCombinedColumns() {
-    this.http.get<string[]>('http://localhost:3000/combinedColumns').subscribe(
+  fetchCombinedColumns() {
+    this.http.get<any[]>('http://localhost:3000/combinedColumns').subscribe(
       (response) => {
         this.combinedColumns = response;
       },
       (error) => {
-        console.log('Error:', error);
+        console.error('Error fetching combined columns:', error);
       }
     );
   }

@@ -1,4 +1,61 @@
 <h1>Combined Columns</h1>
-<ul>
-  <li *ngFor="let item of combinedColumns" style="display: inline-block; border: 1px solid black; padding: 5px; margin: 5px; word-break: break-all;">{{ item }}</li>
-</ul>
+<table>
+  <tr>
+    <th>Amenlei</th>
+    <th>Azhuanyeleibie</th>
+    <th>Azhuanyedaima</th>
+    <th>Azhuanyemingchengyaoqiu</th>
+    <th>Axuankeyaoqiu</th>
+    <th>Ayuanxiaodaima</th>
+    <th>Axuexiaomingc</th>
+    <th>Acengci</th>
+    <th>Ashengfen</th>
+    <th>Acity</th>
+    <th>A22toudangfen</th>
+    <th>A22toudangweici</th>
+    <th>Axuefei</th>
+    <th>Azhaoshengleix</th>
+    <th>Acitypaihang</th>
+    <th>A22jihuashu</th>
+    <th>zhuanyetese</th>
+    <th>A21zuidifen</th>
+    <th>A21zuidiweici</th>
+    <th>A22jihua</th>
+    <th>A21jihua</th>
+    <th>Atuimianyanzhao</th>
+    <th>Abeizhu</th>
+    <th>Axuezhi</th>
+    <th>Acengcitedian</th>
+    <th>Ajihuashu</th>
+    <th>Azhuanyemingcheng</th>
+  </tr>
+  <tr *ngFor="let item of combinedColumns">
+    <td>{{ item.Amenlei }}</td>
+    <td>{{ item.Azhuanyeleibie }}</td>
+    <td>{{ item.Azhuanyedaima }}</td>
+    <td>{{ item.Azhuanyemingchengyaoqiu }}</td>
+    <td>{{ item.Axuankeyaoqiu }}</td>
+    <td>{{ item.Ayuanxiaodaima }}</td>
+    <td>{{ item.Axuexiaomingc }}</td>
+    <td>{{ item.Acengci }}</td>
+    <td>{{ item.Ashengfen }}</td>
+    <td>{{ item.Acity }}</td>
+    <td>{{ item.A22toudangfen }}</td>
+    <td>{{ item.A22toudangweici }}</td>
+    <td>{{ item.Axuefei }}</td>
+    <td>{{ item.Azhaoshengleix }}</td>
+    <td>{{ item.Acitypaihang }}</td>
+    <td>{{ item.A22jihuashu }}</td>
+    <td>{{ item.zhuanyetese }}</td>
+    <td>{{ item.A21zuidifen }}</td>
+    <td>{{ item.A21zuidiweici }}</td>
+    <td>{{ item.A22jihua }}</td>
+    <td>{{ item.A21jihua }}</td>
+    <td>{{ item.Atuimianyanzhao }}</td>
+    <td>{{ item.Abeizhu }}</td>
+    <td>{{ item.Axuezhi }}</td>
+    <td>{{ item.Acengcitedian }}</td>
+    <td>{{ item.Ajihuashu }}</td>
+    <td>{{ item.Azhuanyemingcheng }}</td>
+  </tr>
+</table>
