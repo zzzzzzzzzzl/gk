@@ -1,0 +1,176 @@
+/* 美化地区、公办/民办小标题样式 */
+.filter .filter-title {
+  display: block; /* 单独占一行 */
+  font-weight: bold; /* 标题样式 */
+}
+
+.filter .query-button {
+  display: block; /* 单独占一行 */
+  margin-top: 10px; /* 顶部间距 */
+  padding: 10px 20px; /* 调整按钮尺寸 */
+  background-color: #f60;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.3s ease; /* 透明度过渡效果 */
+
+  /* 新增样式 */
+  width: fit-content; /* 根据内容宽度调整按钮宽度 */
+  margin: 10px auto; /* 水平居中 */
+  text-align: center; /* 文字居中 */
+  box-shadow: none; /* 去除阴影效果 */
+}
+
+
+.filter .query-button:hover {
+  opacity: 0.8; /* 悬停时透明度降低 */
+}
+
+/* 结果部分样式 */
+.schools {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* 左右对齐 */
+}
+
+.filter-group {
+  display: inline-flex; /* 使用内联弹性布局 */
+  align-items: center; /* 垂直居中对齐 */
+  margin-right: 30px; /* 右侧间距 */
+}
+
+.filter-group:last-child {
+  margin-right: 0; /* 最后一个选择框和按钮去除右侧间距 */
+}
+
+.school {
+  width: calc(25% - 20px); /* 设置每个框的宽度，减去间距的宽度 */
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s ease;
+  overflow: hidden;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* 底部间距 */
+}
+
+.school:nth-child(4n) {
+  margin-right: 0; /* 每行的最后一个学校框去掉右侧间距 */
+}
+
+/* 省份选择框样式 */
+.filter select {
+  width: 150px; /* 设置固定宽度 */
+  margin-right: 10px;
+}
+
+/* 标签样式 */
+.school .tags .tag {
+  display: inline-block;
+  padding: 3px 8px;
+  margin-right: 4px;
+  background-color: rgba(238, 238, 238, 0.5);
+  color: #333;
+  border-radius: 4px;
+  opacity: 0.8; /* 初始透明度 */
+  transition: opacity 0.3s ease; /* 透明度过渡效果 */
+}
+
+.school .tags .tag:hover {
+  opacity: 1; /* 悬停时透明度恢复 */
+}
+
+/* 省份标签样式 */
+.checkbox-label {
+  display: inline-flex; /* 使用内联弹性布局 */
+  align-items: center; /* 垂直居中对齐 */
+  margin-right: 10px;
+  margin-bottom: 10px; /* 底部间距 */
+}
+
+.province-label {
+  font-weight: normal;
+  font-size: 14px;
+  margin-left: 2px; /* 左侧间距 */
+}
+
+.provinces {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2px;
+}
+
+.provinces .checkbox-label {
+  display: inline-flex; /* 使用内联弹性布局 */
+  align-items: center; /* 垂直居中对齐 */
+  margin-right: 15px;
+  margin-bottom: 5px; /* 底部间距 */
+}
+
+
+/* 标签样式横向排列 */
+.filter select,
+.filter .provinces {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter select option,
+.filter .checkbox-label {
+  white-space: nowrap;
+  margin-right: 10px;
+}
+
+/* 标签样式 */
+.school .tags .tag {
+  display: inline-block;
+  padding: 3px 8px;
+  margin-right: 4px;
+  background-color: rgba(238, 238, 238, 0.5);
+  color: #333;
+  border-radius: 4px;
+  opacity: 0.8; /* 初始透明度 */
+  transition: opacity 0.3s ease; /* 透明度过渡效果 */
+}
+
+.school {
+  width: calc(23% - 5px); /* 设置每个框的宽度，减去间距的宽度 */
+  border-radius: 8px; /* 添加圆角 */
+  border: 1px solid transparent; /* 初始时边框透明 */
+  transition: border-color 0.3s ease; /* 边框颜色渐变过渡效果 */
+  overflow: hidden; /* 隐藏超出框的内容 */
+  padding: 8px; /* 设置内边距 */
+  text-align: center; /* 文字居中对齐 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+}
+
+.school:hover {
+  border-color: #f60; /* 鼠标悬停时边框颜色渐变为橘色 */
+}
+
+.school .name {
+  font-size: 14px; /* 字号变小 */
+  white-space: nowrap; /* 不换行 */
+  overflow: hidden; /* 超出框的内容隐藏 */
+  text-overflow: ellipsis; /* 超出框的内容显示省略号 */
+  margin-bottom: 8px; /* 底部间距 */
+}
+
+.school .tags .tag {
+  /* 添加标签的扁平化样式 */
+  display: inline-block;
+  padding: 3px 3px;
+  margin-right: 4px;
+  background-color: rgba(238, 238, 238, 0.5); /* 透明背景 */
+  color: #333;
+  border-radius: 4px;
+}
+/* 添加一个新的 CSS 类 */
+.small-text {
+  font-size: 3px;
+}
+
+/* 其他样式保持不变 */

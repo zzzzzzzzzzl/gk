@@ -1,0 +1,16 @@
+<ul class="menu-list">
+  <li *ngFor="let Gakou of gakous" class="menu-item">
+    <a routerLink="/detail/{{Gakou.id}}" class="menu-link">
+      {{Gakou.name}}
+    </a>
+  </li>
+</ul>
+<!-- meniu.component.html -->
+<ul class="menu-list">
+  <li *ngFor="let gakou of gakous" class="menu-item">
+    <a (click)="navigateToDetail(gakou)" class="menu-link">
+      {{ gakou.name }}
+    </a>
+  </li>
+</ul>
+

@@ -120,113 +120,25 @@ app.get('/unique-values', (req, res) => {
   });
 });
 
-// // 在 server.js 文件中添加以下代码
-// app.get('/filtered-schools', (req, res) => {
-//   const { xuankeYaoqiu, province, city, zhuanyeLeibie, tuitionLessThan8000 } = req.query;
+function getDataFromDatabase(tableName, page, pageSize) {
+  const offset = (page - 1) * pageSize;
+  const query = `SELECT * FROM ${tableName} LIMIT ?, ?`;
 
-//   let query = 'SELECT * FROM chaxun WHERE 1=1';
-
-//   if (xuankeYaoqiu) {
-//     query += ` AND Axuankeyaoqiu = '${xuankeYaoqiu}'`;
-//   }
-
-//   if (province) {
-//     query += ` AND Ashengfen = '${province}'`;
-//   }
-
-//   if (city) {
-//     query += ` AND Acity = '${city}'`;
-//   }
-
-//   if (zhuanyeLeibie) {
-//     query += ` AND Azhuanyeleibie = '${zhuanyeLeibie}'`;
-//   }
-
-//   if (tuitionLessThan8000) {
-//     query += ' AND Axuefei < 8000';
-//   }
-
-//   connection.query(query, (error, results) => {
-//     if (error) {
-//       console.error('查询数据失败：', error);
-//       res.status(500).json({ error: '查询数据失败' });
-//     } else {
-//       res.json(results);
-//     }
-//   });
-// });
-
-// app.get('/api/filteredchaxun', (req, res) => {
-//   const { xuankeYaoqiu, province, city, zhuanyeLeibie, tuitionLessThan8000 } = req.query;
-
-//   let query = 'SELECT * FROM chaxun WHERE 1=1';
-
-//   if (xuankeYaoqiu) {
-//     query += ` AND Axuankeyaoqiu = '${xuankeYaoqiu}'`;
-//   }
-
-//   if (province) {
-//     query += ` AND Ashengfen = '${province}'`;
-//   }
-
-//   if (city) {
-//     query += ` AND Acity = '${city}'`;
-//   }
-
-//   if (zhuanyeLeibie) {
-//     query += ` AND Azhuanyeleibie = '${zhuanyeLeibie}'`;
-//   }
-
-//   if (tuitionLessThan8000) {
-//     query += ' AND Axuefei < 8000';
-//   }
-
-//   connection.query(query, (error, results) => {
-//     if (error) {
-//       console.error('查询数据失败：', error);
-//       res.status(500).json({ error: '查询数据失败' });
-//     } else {
-//       res.json(results);
-//     }
-//   });
-// });
-
-
-
-// 启动服务器
-app.listen(3000, () => {
-  console.log('Node.js服务器已启动，监听端口3000！');
-});
-
-app.get('/api/table-data', (req, res) => {
-  const tableName = req.query.tableName;
-
-  connection.query(`SELECT * FROM ${tableName}`, (error, results) => {
-    if (error) {
-      console.error(`查询 "${tableName}" 表失败：`, error);
-      res.status(500).json({ error: '数据库查询错误' });
-      return;
-    }
-
-    const tableData = [];
-    for (let i = 0; i < results.length; i++) {
-      const row = results[i];
-      const rowData = [];
-      for (const column in row) {
-        rowData.push(row[column]);
+  return new Promise((resolve, reject) => {
+    connection.query(query, [offset, pageSize], (error, results) => {
+      if (error) {
+        console.error(`查询 "${tableName}" 表失败：`, error);
+        reject(error);
+      } else {
+        resolve(results);
       }
-      tableData.push(rowData);
-    }
-
-    res.json(tableData);
+    });
   });
+}
 
-    }
 
 
-    );
-
-  app.get('/api/filtered-chaxun', (req, res) => {
+ app.get('/api/filtered-chaxun', (req, res) => {
     const { xuankeYaoqiu, province, city, zhuanyeLeibie, tuitionLessThan8000 } = req.query;
 
     let query = 'SELECT * FROM chaxun WHERE 1=1';
@@ -257,8 +169,60 @@ app.get('/api/table-data', (req, res) => {
         res.status(500).json({ error: '查询数据失败' });
       } else {
         res.json(results);
-      };
-
+      }
+    });
 });
 
-  })
+//--------------------------------------------------------------------
+// 路由处理程序
+app.get('/combinedColumns', (req, res) => {
+  // SQL查询语句
+  const query = 'SELECT CONCAT_WS("", Amenlei, Azhuanyeleibie, Azhuanyedaima, Azhuanyemingchengyaoqiu, Axuankeyaoqiu, Ayuanxiaodaima, Axuexiaomingc, Acengci, Ashengfen, Acity, A22toudangfen, A22toudangweici, Axuefei, Azhaoshengleix, Acitypaihang, A22jihuashu, zhuanyetese, A21zuidifen, A21zuidiweici, A22jihua, A21jihua, Atuimianyanzhao, Abeizhu, Axuezhi, Acengcitedian, Ajihuashu, Azhuanyemingcheng) AS combinedColumn FROM chaxun;'
+
+
+  // 执行查询
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Error executing query: ' + err.stack);
+      res.status(500).send('Error executing query');
+      return;
+    }
+
+    // 获取查询结果中的合并列数据
+    const combinedColumns = results.map(result => result.combinedColumn);
+
+    // 返回查询结果
+    res.json(combinedColumns);
+  });
+});
+
+//-------------------------------------------------------------------------------------------------
+// 启动服务器
+app.listen(3000, () => {
+  console.log('Node.js服务器已启动，监听端口3000！');
+});
+
+app.get('/api/table-data', (req, res) => {
+  const tableName = req.query.tableName;
+
+  connection.query(`SELECT * FROM ${tableName}`, (error, results) => {
+    if (error) {
+      console.error(`查询 "${tableName}" 表失败：`, error);
+      res.status(500).json({ error: '数据库查询错误' });
+      return;
+    }
+
+    const tableData = [];
+    for (let i = 0; i < results.length; i++) {
+      const row = results[i];
+      const rowData = [];
+      for (const column in row) {
+        rowData.push(row[column]);
+      }
+      tableData.push(rowData);
+    }
+
+    res.json(tableData);
+  });
+
+});

@@ -1,0 +1,13 @@
+<div class="subject-buttons">
+  <button *ngFor="let category of categories" (click)="onSubjectClick(category.name)">
+    {{ category.name }}
+  </button>
+</div>
+
+<div *ngIf="selectedSubject !== ''">
+  <h2>选择的科目: {{ selectedSubject }}</h2>
+  <h3>专业:</h3>
+  <ul>
+    <li *ngFor="let specialty of getSelectedSpecialties()">{{ specialty }}</li>
+  </ul>
+</div>

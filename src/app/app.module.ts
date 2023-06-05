@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { XxZyComponent } from './xx-zy/xx-zy.component';
 import { Gk2022Component } from './gk2022/gk2022.component';
-
+import { ChaxunModule } from './chaxun/chaxun.module';
 
 
 
@@ -24,10 +24,12 @@ import { Gk2022Component } from './gk2022/gk2022.component';
     RouterModule,
     AppRoutingModule,
     FormsModule,
+    ChaxunModule,
     HttpClientModule
   ],
     declarations: [
     AppComponent,
+
     gaokaoComponent,
     DashboardComponent,
     MessagesComponent,

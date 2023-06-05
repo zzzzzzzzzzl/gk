@@ -1,0 +1,45 @@
+<div>
+  <div class="filter">
+    <label class="filter-title">地区：</label>
+    <div class="provinces">
+      <label *ngFor="let province of provinces" class="checkbox-label">
+        <input type="checkbox" [(ngModel)]="selectedProvinces[province]" (change)="applyFilter()">
+        <span class="province-label">{{ province }}</span>
+      </label>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-title">公办/民办：</label>
+      <select [(ngModel)]="selectedEducationType" (change)="applyFilter()">
+        <option value="">全部</option>
+        <option value="公办">公办</option>
+        <option value="民办">民办</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-title">985/211：</label>
+      <select [(ngModel)]="selected985211" (change)="applyFilter()">
+        <option value="">全部</option>
+        <option value="985">985</option>
+        <option value="211">211</option>
+      </select>
+    </div>
+    <button class="query-button" (click)="applyFilter()">查询</button>
+  </div>
+
+  <hr class="divider">
+
+  <div class="schools">
+    <div class="school" *ngFor="let school of filteredSchools">
+      <div class="name">{{ school.name }}</div>
+      <div class="tags">
+        <span *ngIf="school.is_985" class="tag small-tag">985</span>
+        <span *ngIf="school.is_211" class="tag small-tag">211</span>
+        <span *ngIf="school.education_type" class="tag small-tag small-text">{{ school.education_type }}</span>
+        <span class="tag small-tag small-text">{{ school.province }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex-grow: 1;
+  word-wrap: break-word;
+  max-width: 200px; /* 根据需要设置每个逗号之间的最大宽度 */
+  padding: 5px;
+  border: 1px solid black;
+  margin: 2px;
+}
