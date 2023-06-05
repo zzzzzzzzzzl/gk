@@ -175,10 +175,33 @@ function getDataFromDatabase(tableName, page, pageSize) {
 
 //--------------------------------------------------------------------
 // 路由处理程序
-app.get('/combinedColumns', (req, res) => {
-  // SQL查询语句
-  const query = 'SELECT CONCAT_WS("", Amenlei, Azhuanyeleibie, Azhuanyedaima, Azhuanyemingchengyaoqiu, Axuankeyaoqiu, Ayuanxiaodaima, Axuexiaomingc, Acengci, Ashengfen, Acity, A22toudangfen, A22toudangweici, Axuefei, Azhaoshengleix, Acitypaihang, A22jihuashu, zhuanyetese, A21zuidifen, A21zuidiweici, A22jihua, A21jihua, Atuimianyanzhao, Abeizhu, Axuezhi, Acengcitedian, Ajihuashu, Azhuanyemingcheng) AS combinedColumn FROM chaxun;'
+// app.get('/combinedColumns', (req, res) => {
+//   // SQL查询语句
+//   const query = 'SELECT CONCAT_WS("  ", Amenlei, Azhuanyeleibie, Azhuanyedaima, Azhuanyemingchengyaoqiu, Axuankeyaoqiu, Ayuanxiaodaima, Axuexiaomingc, Acengci, Ashengfen, Acity, A22toudangfen, A22toudangweici, Axuefei, Azhaoshengleix, Acitypaihang, A22jihuashu, zhuanyetese, A21zuidifen, A21zuidiweici, A22jihua, A21jihua, Atuimianyanzhao, Abeizhu, Axuezhi, Acengcitedian, Ajihuashu, Azhuanyemingcheng) AS combinedColumn FROM chaxun;'
 
+
+//   // 执行查询
+//   connection.query(query, (err, results) => {
+//     if (err) {
+//       console.error('Error executing query: ' + err.stack);
+//       res.status(500).send('Error executing query');
+//       return;
+//     }
+
+//     // 获取查询结果中的合并列数据
+//     const combinedColumns = results.map(result => result.combinedColumn);
+
+//     // 返回查询结果
+//     res.json(combinedColumns);
+//   });
+// });
+
+
+
+ // 路由处理程序
+ app.get('/combinedColumns', (req, res) => {
+  // SQL查询语句
+  const query = 'SELECT Amenlei, Azhuanyeleibie, Azhuanyedaima, Azhuanyemingchengyaoqiu, Axuankeyaoqiu, Ayuanxiaodaima, Axuexiaomingc, Acengci, Ashengfen, Acity, A22toudangfen, A22toudangweici, Axuefei, Azhaoshengleix, Acitypaihang, A22jihuashu, zhuanyetese, A21zuidifen, A21zuidiweici, A22jihua, A21jihua, Atuimianyanzhao, Abeizhu, Axuezhi, Acengcitedian, Ajihuashu, Azhuanyemingcheng FROM chaxun;'
 
   // 执行查询
   connection.query(query, (err, results) => {
@@ -188,13 +211,50 @@ app.get('/combinedColumns', (req, res) => {
       return;
     }
 
-    // 获取查询结果中的合并列数据
-    const combinedColumns = results.map(result => result.combinedColumn);
+    // 获取查询结果
+    const combinedColumns = [];
 
-    // 返回查询结果
+    // 将查询结果按属性分开
+    results.forEach(result => {
+      const item = {
+        Amenlei: result.Amenlei,
+        Azhuanyeleibie: result.Azhuanyeleibie,
+        Azhuanyedaima: result.Azhuanyedaima,
+        Azhuanyemingchengyaoqiu: result.Azhuanyemingchengyaoqiu,
+        Axuankeyaoqiu: result.Axuankeyaoqiu,
+        Ayuanxiaodaima: result.Ayuanxiaodaima,
+        Axuexiaomingc: result.Axuexiaomingc,
+        Acengci: result.Acengci,
+        Ashengfen: result.Ashengfen,
+        Acity: result.Acity,
+        A22toudangfen: result.A22toudangfen,
+        A22toudangweici: result.A22toudangweici,
+        Axuefei: result.Axuefei,
+        Azhaoshengleix: result.Azhaoshengleix,
+        Acitypaihang: result.Acitypaihang,
+        A22jihuashu: result.A22jihuashu,
+        zhuanyetese: result.zhuanyetese,
+        A21zuidifen: result.A21zuidifen,
+        A21zuidiweici: result.A21zuidiweici,
+        A22jihua: result.A22jihua,
+        A21jihua: result.A21jihua,
+        Atuimianyanzhao: result.Atuimianyanzhao,
+        Abeizhu: result.Abeizhu,
+        Axuezhi: result.Axuezhi,
+        Acengcitedian: result.Acengcitedian,
+        Ajihuashu: result.Ajihuashu,
+        Azhuanyemingcheng: result.Azhuanyemingcheng // 添加了一个属性
+      };
+
+      combinedColumns.push(item);
+    });
+
+    // 发送结果作为响应
     res.json(combinedColumns);
   });
 });
+
+
 
 //-------------------------------------------------------------------------------------------------
 // 启动服务器
