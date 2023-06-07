@@ -1,0 +1,49 @@
+.subject-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.subject-buttons button {
+  background-color: transparent;
+  border: none;
+  color: #000;
+  padding: 10px 20px;
+  margin: 0 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subject-buttons button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+.selected-subject {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #000;
+  margin-top: 20px;
+}
+
+.selected-subject h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.selected-subject h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.selected-subject ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.selected-subject li {
+  font-size: 16px;
+  margin-bottom: 5px;
+}

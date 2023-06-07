@@ -19,3 +19,34 @@ li {
   font-size: smaller;
 }
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.pagination {
+  margin-top: 10px;
+}
+
+.pagination button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #45a049;
+}
