@@ -1,34 +1,67 @@
-<h1>Combined Columns</h1>
+<div>
+  <!-- 筛选选项 -->
+  <label for="axuankeyaoqiu">选课要求:</label>
+  <select id="axuankeyaoqiu" [(ngModel)]="Axuankeyaoqiu" (ngModelChange)="applyFilter()">
+    <option value="">全部</option>
+    <option *ngFor="let option of getUniqueOptions('Axuankeyaoqiu')" [value]="option">{{ option }}</option>
+  </select>
+
+  <label for="acengci">层次:</label>
+  <select id="acengci" [(ngModel)]="Acengci" (ngModelChange)="applyFilter()">
+    <option value="">全部</option>
+    <option *ngFor="let option of getUniqueOptions('Acengci')" [value]="option">{{ option }}</option>
+  </select>
+
+  <label for="ashengfen">省份:</label>
+  <select id="ashengfen" [(ngModel)]="Ashengfen" (ngModelChange)="applyFilter()">
+    <option value="">全部</option>
+    <option *ngFor="let option of getUniqueOptions('Ashengfen')" [value]="option">{{ option }}</option>
+  </select>
+
+  <label for="acity">城市:</label>
+  <select id="acity" [(ngModel)]="Acity" (ngModelChange)="applyFilter()">
+    <option value="">全部</option>
+    <option *ngFor="let option of getUniqueOptions('Acity')" [value]="option">{{ option }}</option>
+  </select>
+
+  <label for="acitypaihang">城市排行:</label>
+  <select id="acitypaihang" [(ngModel)]="Acitypaihang" (ngModelChange)="applyFilter()">
+    <option value="">全部</option>
+    <option *ngFor="let option of getUniqueOptions('Acitypaihang')" [value]="option">{{ option }}</option>
+  </select>
+</div>
 <table>
   <tr>
-    <th>Amenlei</th>
-    <th>Azhuanyeleibie</th>
-    <th>Azhuanyedaima</th>
-    <th>Azhuanyemingchengyaoqiu</th>
-    <th>Axuankeyaoqiu</th>
-    <th>Ayuanxiaodaima</th>
-    <th>Axuexiaomingc</th>
-    <th>Acengci</th>
-    <th>Ashengfen</th>
-    <th>Acity</th>
-    <th>A22toudangfen</th>
-    <th>A22toudangweici</th>
-    <th>Axuefei</th>
-    <th>Azhaoshengleix</th>
-    <th>Acitypaihang</th>
-    <th>A22jihuashu</th>
-    <th>zhuanyetese</th>
-    <th>A21zuidifen</th>
-    <th>A21zuidiweici</th>
-    <th>A22jihua</th>
-    <th>A21jihua</th>
-    <th>Atuimianyanzhao</th>
-    <th>Abeizhu</th>
-    <th>Axuezhi</th>
-    <th>Acengcitedian</th>
-    <th>Ajihuashu</th>
-    <th>Azhuanyemingcheng</th>
-  </tr>
+    <table>
+      <tr>
+        <th>专业代码</th>
+        <th>专业类别</th>
+        <th>专业代码</th>
+        <th>专业名称与要求</th>
+        <th>选课要求</th>
+        <th>院校代码</th>
+        <th>学校名称</th>
+        <th>层次</th>
+        <th>省份</th>
+        <th>城市</th>
+        <th>22投档分</th>
+        <th>22投档最低位次</th>
+        <th>学费</th>
+        <th>招生类型</th>
+        <th>城市排行</th>
+        <th>22投档计划数</th>
+        <th>专业特色</th>
+        <th>21最低分</th>
+        <th>21最低位次</th>
+        <th>22招生计划</th>
+        <th>21计划</th>
+        <th>推免与招研</th>
+        <th>备注</th>
+        <th>学制</th>
+        <th>层次与特点</th>
+        <th>院校计划数</th>
+        <th>专业名称</th>
+      </tr>
   <tr *ngFor="let item of displayedColumns">
     <td>{{ item.Amenlei }}</td>
     <td>{{ item.Azhuanyeleibie }}</td>

@@ -47,6 +47,15 @@ th, td {
   cursor: pointer;
 }
 
-.pagination button:hover {
-  background-color: #45a049;
+.filter-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.filter-option {
+  margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
 }
