@@ -23,7 +23,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes),UiScrollModule,ScrollingModule,
-    FormsModule],
+    FormsModule,FormsModule],
 
   exports: [ RouterModule ]
 

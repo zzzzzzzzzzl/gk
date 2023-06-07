@@ -3,33 +3,35 @@
   <label for="axuankeyaoqiu">选课要求:</label>
   <select id="axuankeyaoqiu" [(ngModel)]="Axuankeyaoqiu" (ngModelChange)="applyFilter()">
     <option value="">全部</option>
-    <option *ngFor="let option of getUniqueOptions('Axuankeyaoqiu')" [value]="option">{{ option }}</option>
+    <option *ngFor="let option of AxuankeyaoqiuOptions" [value]="option">{{ option }}</option>
   </select>
 
   <label for="acengci">层次:</label>
   <select id="acengci" [(ngModel)]="Acengci" (ngModelChange)="applyFilter()">
     <option value="">全部</option>
-    <option *ngFor="let option of getUniqueOptions('Acengci')" [value]="option">{{ option }}</option>
+    <option *ngFor="let option of AcengciOptions" [value]="option">{{ option }}</option>
   </select>
 
   <label for="ashengfen">省份:</label>
   <select id="ashengfen" [(ngModel)]="Ashengfen" (ngModelChange)="applyFilter()">
     <option value="">全部</option>
-    <option *ngFor="let option of getUniqueOptions('Ashengfen')" [value]="option">{{ option }}</option>
+    <option *ngFor="let option of AshengfenOptions" [value]="option">{{ option }}</option>
   </select>
 
   <label for="acity">城市:</label>
   <select id="acity" [(ngModel)]="Acity" (ngModelChange)="applyFilter()">
     <option value="">全部</option>
-    <option *ngFor="let option of getUniqueOptions('Acity')" [value]="option">{{ option }}</option>
+    <option *ngFor="let option of AcityOptions" [value]="option">{{ option }}</option>
   </select>
 
   <label for="acitypaihang">城市排行:</label>
   <select id="acitypaihang" [(ngModel)]="Acitypaihang" (ngModelChange)="applyFilter()">
     <option value="">全部</option>
-    <option *ngFor="let option of getUniqueOptions('Acitypaihang')" [value]="option">{{ option }}</option>
+    <option *ngFor="let option of AcitypaihangOptions" [value]="option">{{ option }}</option>
   </select>
 </div>
+
+
 <table>
   <tr>
     <table>
