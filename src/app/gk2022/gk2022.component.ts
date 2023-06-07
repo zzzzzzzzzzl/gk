@@ -34,6 +34,13 @@ export class Gk2022Component implements OnInit {
   Acity: string = '';
   Acitypaihang: string = '';
 
+// 在组件的属性中添加新的选中对象
+selectedAxuankeyaoqiuOptions: { [key: string]: boolean } = {};
+selectedAcengciOptions: { [key: string]: boolean } = {};
+selectedAshengfenOptions: { [key: string]: boolean } = {};
+selectedAcityOptions: { [key: string]: boolean } = {};
+selectedAcitypaihangOptions: { [key: string]: boolean } = {};
+
   constructor(private http: HttpClient, private dataService: DataService) { }
 
   ngOnInit() {
@@ -92,29 +99,31 @@ export class Gk2022Component implements OnInit {
     this.filteredData = this.combinedColumns.filter(item => {
       let passFilter = true;
 
-      if (this.Axuankeyaoqiu !== '') {
-        passFilter = passFilter && this.Axuankeyaoqiu === item.Axuankeyaoqiu;
+      // 检查选中的复选框值
+      if (Object.values(this.selectedAxuankeyaoqiuOptions).some(value => value)) {
+        passFilter = passFilter && this.selectedAxuankeyaoqiuOptions[item.Axuankeyaoqiu];
       }
 
-      if (this.Acengci !== '') {
-        passFilter = passFilter && this.Acengci === item.Acengci;
+      if (Object.values(this.selectedAcengciOptions).some(value => value)) {
+        passFilter = passFilter && this.selectedAcengciOptions[item.Acengci];
       }
 
-      if (this.Ashengfen !== '') {
-        passFilter = passFilter && this.Ashengfen === item.Ashengfen;
+      if (Object.values(this.selectedAshengfenOptions).some(value => value)) {
+        passFilter = passFilter && this.selectedAshengfenOptions[item.Ashengfen];
       }
 
-      if (this.Acity !== '') {
-        passFilter = passFilter && this.Acity === item.Acity;
+      if (Object.values(this.selectedAcityOptions).some(value => value)) {
+        passFilter = passFilter && this.selectedAcityOptions[item.Acity];
       }
 
-      if (this.Acitypaihang !== '') {
-        passFilter = passFilter && this.Acitypaihang === item.Acitypaihang;
+      if (Object.values(this.selectedAcitypaihangOptions).some(value => value)) {
+        passFilter = passFilter && this.selectedAcitypaihangOptions[item.Acitypaihang];
       }
 
       return passFilter;
     });
 
+    // 更新显示的数据
     this.displayedColumns = this.filteredData.slice(
       (this.currentPage - 1) * this.itemsPerPage,
       this.currentPage * this.itemsPerPage

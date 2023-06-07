@@ -1,36 +1,39 @@
+<h2>筛选</h2>
 <div>
   <!-- 筛选选项 -->
   <label for="axuankeyaoqiu">选课要求:</label>
-  <select id="axuankeyaoqiu" [(ngModel)]="Axuankeyaoqiu" (ngModelChange)="applyFilter()">
-    <option value="">全部</option>
-    <option *ngFor="let option of AxuankeyaoqiuOptions" [value]="option">{{ option }}</option>
-  </select>
+  <div class="horizontal-options">
+    <div *ngFor="let option of AxuankeyaoqiuOptions">
+      <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAxuankeyaoqiuOptions[option]" (change)="applyFilter()">
+      <label for="{{ option }}">{{ option }}</label>
+    </div>
+  </div>
+
 
   <label for="acengci">层次:</label>
-  <select id="acengci" [(ngModel)]="Acengci" (ngModelChange)="applyFilter()">
-    <option value="">全部</option>
-    <option *ngFor="let option of AcengciOptions" [value]="option">{{ option }}</option>
-  </select>
+  <div class="horizontal-options">
+    <div *ngFor="let option of AcengciOptions">
+      <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAcengciOptions[option]" (change)="applyFilter()">
+      <label for="{{ option }}">{{ option }}</label>
+    </div>
+  </div>
+
 
   <label for="ashengfen">省份:</label>
-  <select id="ashengfen" [(ngModel)]="Ashengfen" (ngModelChange)="applyFilter()">
-    <option value="">全部</option>
-    <option *ngFor="let option of AshengfenOptions" [value]="option">{{ option }}</option>
-  </select>
-
-  <label for="acity">城市:</label>
-  <select id="acity" [(ngModel)]="Acity" (ngModelChange)="applyFilter()">
-    <option value="">全部</option>
-    <option *ngFor="let option of AcityOptions" [value]="option">{{ option }}</option>
-  </select>
+  <div class="horizontal-options">
+    <div *ngFor="let option of AshengfenOptions">
+      <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAshengfenOptions[option]" (change)="applyFilter()">
+      <label for="{{ option }}">{{ option }}</label>
+    </div>
+  </div>
 
   <label for="acitypaihang">城市排行:</label>
-  <select id="acitypaihang" [(ngModel)]="Acitypaihang" (ngModelChange)="applyFilter()">
-    <option value="">全部</option>
-    <option *ngFor="let option of AcitypaihangOptions" [value]="option">{{ option }}</option>
-  </select>
-</div>
-
+  <div class="horizontal-options">
+    <div *ngFor="let option of AcitypaihangOptions">
+      <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAcitypaihangOptions[option]" (change)="applyFilter()">
+      <label for="{{ option }}">{{ option }}</label>
+    </div>
+  </div>
 
 <table>
   <tr>
@@ -68,7 +71,7 @@
     <td>{{ item.Amenlei }}</td>
     <td>{{ item.Azhuanyeleibie }}</td>
     <td>{{ item.Azhuanyedaima }}</td>
-    <td>{{ item.Azhuanyemingchengyaoqiu }}</td>
+    <td style="text-align: left; word-break: break-all; overflow-wrap: break-word; max-width: 10em;">{{ item.Azhuanyemingchengyaoqiu }}</td>
     <td>{{ item.Axuankeyaoqiu }}</td>
     <td>{{ item.Ayuanxiaodaima }}</td>
     <td>{{ item.Axuexiaomingc }}</td>
