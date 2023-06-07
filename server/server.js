@@ -249,6 +249,8 @@ function getDataFromDatabase(tableName, page, pageSize) {
       combinedColumns.push(item);
     });
 
+    this.data = combinedColumns; // 添加这行代码
+
     // 发送结果作为响应
     res.json(combinedColumns);
   });
