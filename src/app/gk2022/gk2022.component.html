@@ -1,45 +1,46 @@
-<label for="axuankeyaoqiu">选课要求:</label>
-<div class="horizontal-options">
+<label for="axuankeyaoqiu" class="compact-label">选课要求:</label>
+<div class="horizontal-options compact-options">
   <div *ngFor="let option of AxuankeyaoqiuOptions">
     <input type="checkbox" id="axuankeyaoqiu-{{ option }}" [(ngModel)]="selectedAxuankeyaoqiuOptions[option]" (change)="applyFilter()">
-    <label for="axuankeyaoqiu-{{ option }}">{{ option }}</label>
+    <label for="axuankeyaoqiu-{{ option }}" class="compact-label">{{ option }}</label>
   </div>
 </div>
 
 <div>
-  <label for="acengci">层次:</label>
-  <div class="horizontal-options">
+  <label for="acengci" class="compact-label">层次:</label>
+  <div class="horizontal-options compact-options">
     <div *ngFor="let option of AcengciOptions">
       <input type="checkbox" id="acengci-{{ option }}" [(ngModel)]="selectedAcengciOptions[option]" (change)="applyFilter()">
-      <label for="acengci-{{ option }}">{{ option }}</label>
+      <label for="acengci-{{ option }}" class="compact-label">{{ option }}</label>
     </div>
   </div>
 </div>
 
 <div>
-  <label for="ashengfen">省份:</label>
-  <div class="horizontal-options">
+  <label for="ashengfen" class="compact-label">省份:</label>
+  <div class="horizontal-options compact-options">
     <div *ngFor="let option of AshengfenOptions">
       <input type="checkbox" id="ashengfen-{{ option }}" [(ngModel)]="selectedAshengfenOptions[option]" (change)="applyFilter()">
-      <label for="ashengfen-{{ option }}">{{ option }}</label>
+      <label for="ashengfen-{{ option }}" class="compact-label">{{ option }}</label>
     </div>
   </div>
 </div>
 
 <div>
-  <label for="acity">城市:</label>
-  <div class="horizontal-options">
+  <label for="acity" class="compact-label">城市:</label>
+  <div class="horizontal-options compact-options">
     <div *ngFor="let option of AcityOptions">
       <input type="checkbox" id="acity-{{ option }}" [(ngModel)]="selectedAcityOptions[option]" (change)="applyFilter()">
-      <label for="acity-{{ option }}">{{ option }}</label>
+      <label for="acity-{{ option }}" class="compact-label">{{ option }}</label>
     </div>
   </div>
 </div>
+
 
 
   <div class="input-score">
     <label for="score">请输入分数：</label>
-    <input type="number" id="score" [(ngModel)]="inputScore" (change)="applyFilter()" />
+    <input type="number" [(ngModel)]="inputScore" (change)="applyFilter()">
   </div>
 
 <div class="pagination">

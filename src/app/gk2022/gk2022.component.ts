@@ -125,14 +125,39 @@ export class Gk2022Component implements OnInit {
     // 添加筛选分数的逻辑
     if (this.inputScore > 0) {
       this.filteredByScoreData = this.filteredData.filter((item) => {
-        return item.Ashengfen >= this.inputScore;
+        if (this.inputScore >= 600) {
+          // 判定为600分以上的分数
+          const scorePlus15 = item['22toudangfen'] + 15;
+          const scoreMinus15 = item['22toudangfen'] - 15;
+
+          return this.inputScore >= scoreMinus15 && this.inputScore <= scorePlus15;
+        } else if (this.inputScore >= 550 && this.inputScore < 600) {
+          // 550-600分区间
+          const scorePlus20 = item['22toudangfen'] + 20;
+          const scoreMinus20 = item['22toudangfen'] - 20;
+
+          return this.inputScore >= scoreMinus20 && this.inputScore <= scorePlus20;
+        } else if (this.inputScore >= 490 && this.inputScore < 550) {
+          // 490-550分区间
+          const scorePlus30 = item['22toudangfen'] + 30;
+          const scoreMinus30 = item['22toudangfen'] - 30;
+
+          return this.inputScore >= scoreMinus30 && this.inputScore <= scorePlus30;
+        } else {
+          // 低于490分
+          const scorePlus20 = item['22toudangfen'] + 20;
+
+          return this.inputScore >= scorePlus20;
+        }
       });
+
       this.filteredData = this.filteredByScoreData;
     }
 
     this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
     this.currentPage = 1;
     this.updatePages();
+
   }
 
   restoreFilterOptions() {

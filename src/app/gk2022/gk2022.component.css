@@ -37,7 +37,7 @@
     margin-right: 5px;
   }
 
- 
+
 
   .pagination button {
     border: none;
@@ -74,4 +74,14 @@ table {
 
 th, td {
   font-size: 10px;
+}
+
+.compact-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.compact-label {
+  margin-left: 5px;
 }
