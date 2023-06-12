@@ -72,3 +72,11 @@
 .horizontal-options label {
   margin-right: 5px;
 }
+
+table {
+  font-size: 12px;
+}
+
+th, td {
+  font-size: 10px;
+}

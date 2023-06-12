@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { HttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-gk2022',
@@ -34,17 +33,24 @@ export class Gk2022Component implements OnInit {
   Acity: string = '';
   Acitypaihang: string = '';
 
-// 在组件的属性中添加新的选中对象
+  // 新增的属性
+  inputScore: number = 0;
+  filteredByScoreData: any[] = [];
+
+  // 新增的属性
 selectedAxuankeyaoqiuOptions: { [key: string]: boolean } = {};
 selectedAcengciOptions: { [key: string]: boolean } = {};
 selectedAshengfenOptions: { [key: string]: boolean } = {};
 selectedAcityOptions: { [key: string]: boolean } = {};
 selectedAcitypaihangOptions: { [key: string]: boolean } = {};
 
-  constructor(private http: HttpClient, private dataService: DataService) { }
+
+  constructor(private http: HttpClient, private dataService: DataService) {}
 
   ngOnInit() {
+    this.restoreFilterOptions(); // 恢复筛选选项
     this.fetchCombinedColumns();
+    this.goToPage(1); // 添加此行代码
   }
 
   fetchCombinedColumns() {
@@ -123,12 +129,93 @@ selectedAcitypaihangOptions: { [key: string]: boolean } = {};
       return passFilter;
     });
 
+    // 根据输入的分数进行筛选
+    this.filterByScore();
+
     // 更新显示的数据
     this.displayedColumns = this.filteredData.slice(
       (this.currentPage - 1) * this.itemsPerPage,
       this.currentPage * this.itemsPerPage
     );
+    this.saveFilterOptions(); // 保存筛选选项
+
+    this.goToPage(1); // 添加此行代码
   }
 
 
+  filterByScore() {
+    this.filteredByScoreData = this.filteredData.filter(item => {
+      let passFilter = true;
+
+      if (this.inputScore >= 600) {
+        // 判定为600分以上的分数
+        const scorePlus15 = item['22toudangfen'] + 15;
+        const scoreMinus15 = item['22toudangfen'] - 15;
+
+        passFilter = passFilter && (this.inputScore >= scorePlus15 || this.inputScore <= scoreMinus15);
+      } else if (this.inputScore >= 550 && this.inputScore < 600) {
+        // 550-600分区间
+        const scorePlus20 = item['22toudangfen'] + 20;
+        const scoreMinus20 = item['22toudangfen'] - 20;
+
+        passFilter = passFilter && (this.inputScore >= scorePlus20 || this.inputScore <= scoreMinus20);
+      } else if (this.inputScore >= 490 && this.inputScore < 550) {
+        // 490-550分区间
+        const scorePlus30 = item['22toudangfen'] + 30;
+        const scoreMinus30 = item['22toudangfen'] - 30;
+
+        passFilter = passFilter && (this.inputScore >= scorePlus30 || this.inputScore <= scoreMinus30);
+      } else {
+        // 低于490分
+        const scorePlus20 = item['22toudangfen'] + 20;
+
+        passFilter = passFilter && (this.inputScore >= scorePlus20);
+      }
+
+      return passFilter;
+    });
+  }
+
+  // 新增的方法
+  saveFilterOptions() {
+    const filterOptions = {
+      Axuankeyaoqiu: this.Axuankeyaoqiu,
+      Acengci: this.Acengci,
+      Ashengfen: this.Ashengfen,
+      Acity: this.Acity,
+      Acitypaihang: this.Acitypaihang
+    };
+    localStorage.setItem('filterOptions', JSON.stringify(filterOptions));
+  }
+
+  restoreFilterOptions() {
+    const savedFilterOptions = localStorage.getItem('filterOptions');
+    if (savedFilterOptions) {
+      const filterOptions = JSON.parse(savedFilterOptions);
+      this.Axuankeyaoqiu = filterOptions.Axuankeyaoqiu;
+      this.Acengci = filterOptions.Acengci;
+      this.Ashengfen = filterOptions.Ashengfen;
+      this.Acity = filterOptions.Acity;
+      this.Acitypaihang = filterOptions.Acitypaihang;
+
+      // 选中恢复的选项
+      this.selectedAxuankeyaoqiuOptions[this.Axuankeyaoqiu] = true;
+      this.selectedAcengciOptions[this.Acengci] = true;
+      this.selectedAshengfenOptions[this.Ashengfen] = true;
+      this.selectedAcityOptions[this.Acity] = true;
+      this.selectedAcitypaihangOptions[this.Acitypaihang] = true;
+    }
+  }
+
+
+  clearFilter() {
+    // 重置筛选选项
+    this.selectedAxuankeyaoqiuOptions = {};
+    this.selectedAcengciOptions = {};
+    this.selectedAshengfenOptions = {};
+    this.selectedAcityOptions = {};
+    this.selectedAcitypaihangOptions = {};
+    this.inputScore = 0;
+    this.applyFilter();
+  }
 }

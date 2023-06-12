@@ -1,13 +1,15 @@
 <h2>筛选</h2>
 <div>
   <!-- 筛选选项 -->
-  <label for="axuankeyaoqiu">选课要求:</label>
-  <div class="horizontal-options">
-    <div *ngFor="let option of AxuankeyaoqiuOptions">
-      <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAxuankeyaoqiuOptions[option]" (change)="applyFilter()">
-      <label for="{{ option }}">{{ option }}</label>
+  <div>
+    <!-- 筛选选项 -->
+    <label for="axuankeyaoqiu">选课要求:</label>
+    <div class="horizontal-options">
+      <div *ngFor="let option of AxuankeyaoqiuOptions">
+        <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAxuankeyaoqiuOptions[option]" (change)="applyFilter()">
+        <label for="{{ option }}">{{ option }}</label>
+      </div>
     </div>
-  </div>
 
 
   <label for="acengci">层次:</label>
@@ -27,18 +29,32 @@
     </div>
   </div>
 
-  <label for="acitypaihang">城市排行:</label>
-  <div class="horizontal-options">
-    <div *ngFor="let option of AcitypaihangOptions">
-      <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAcitypaihangOptions[option]" (change)="applyFilter()">
-      <label for="{{ option }}">{{ option }}</label>
-    </div>
+
+
+  <label for="acity">城市:</label>
+<div class="horizontal-options">
+  <div *ngFor="let option of AcityOptions">
+    <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAcityOptions[option]" (change)="applyFilter()">
+    <label for="{{ option }}">{{ option }}</label>
   </div>
+</div>
+
+<!-- Existing code... -->
+
+<div class="input-score">
+  <label for="score">请输入分数：</label>
+  <input type="number" id="score" [(ngModel)]="inputScore" (change)="applyFilter()" />
+</div>
+
+
+<!-- Existing code... -->
+<div class="pagination">
+  <button *ngFor="let page of pages" (click)="goToPage(page)">{{ page }}</button>
+</div>
+
 
 <table>
   <tr>
-    <table>
-      <tr>
         <th>专业代码</th>
         <th>专业类别</th>
         <th>专业代码</th>
@@ -67,6 +83,7 @@
         <th>院校计划数</th>
         <th>专业名称</th>
       </tr>
+
   <tr *ngFor="let item of displayedColumns">
     <td>{{ item.Amenlei }}</td>
     <td>{{ item.Azhuanyeleibie }}</td>
@@ -98,6 +115,4 @@
   </tr>
 </table>
 
-<div class="pagination">
-  <button *ngFor="let page of pages" (click)="goToPage(page)">{{ page }}</button>
-</div>
+
