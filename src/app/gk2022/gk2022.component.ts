@@ -15,6 +15,7 @@ export class Gk2022Component implements OnInit {
   totalPages: number = 1;
   pages: number[] = [];
   displayedColumns: any[] = [];
+  filteredColumns: any[] = [];
 
   data: any[] = [];
   filteredData: any[] = [];
@@ -38,11 +39,11 @@ export class Gk2022Component implements OnInit {
   filteredByScoreData: any[] = [];
 
   // 新增的属性
-selectedAxuankeyaoqiuOptions: { [key: string]: boolean } = {};
-selectedAcengciOptions: { [key: string]: boolean } = {};
-selectedAshengfenOptions: { [key: string]: boolean } = {};
-selectedAcityOptions: { [key: string]: boolean } = {};
-selectedAcitypaihangOptions: { [key: string]: boolean } = {};
+  selectedAxuankeyaoqiuOptions: { [key: string]: boolean } = {};
+  selectedAcengciOptions: { [key: string]: boolean } = {};
+  selectedAshengfenOptions: { [key: string]: boolean } = {};
+  selectedAcityOptions: { [key: string]: boolean } = {};
+  selectedAcitypaihangOptions: { [key: string]: boolean } = {};
 
 
   constructor(private http: HttpClient, private dataService: DataService) {}
@@ -71,16 +72,22 @@ selectedAcitypaihangOptions: { [key: string]: boolean } = {};
   }
 
   updatePages() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedColumns = this.filteredData.slice(startIndex, endIndex);
+
     this.pages = [];
     for (let i = 1; i <= this.totalPages; i++) {
       this.pages.push(i);
     }
   }
 
+
   goToPage(page: number) {
     this.currentPage = page;
-    this.getDisplayedColumns();
+    this.getDisplayedColumns(); // 移动到此处
   }
+
 
   getDisplayedColumns() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -102,45 +109,53 @@ selectedAcitypaihangOptions: { [key: string]: boolean } = {};
   }
 
   applyFilter() {
+    // Filter based on selected options
     this.filteredData = this.combinedColumns.filter(item => {
       let passFilter = true;
 
-      // 检查选中的复选框值
+      // 根据选中的 "选课要求" 进行筛选
       if (Object.values(this.selectedAxuankeyaoqiuOptions).some(value => value)) {
         passFilter = passFilter && this.selectedAxuankeyaoqiuOptions[item.Axuankeyaoqiu];
       }
 
+      // 根据选中的 "层次" 进行筛选
       if (Object.values(this.selectedAcengciOptions).some(value => value)) {
         passFilter = passFilter && this.selectedAcengciOptions[item.Acengci];
       }
 
+      // 根据选中的 "省份" 进行筛选
       if (Object.values(this.selectedAshengfenOptions).some(value => value)) {
         passFilter = passFilter && this.selectedAshengfenOptions[item.Ashengfen];
       }
 
+      // 根据选中的 "城市" 进行筛选
       if (Object.values(this.selectedAcityOptions).some(value => value)) {
         passFilter = passFilter && this.selectedAcityOptions[item.Acity];
-      }
-
-      if (Object.values(this.selectedAcitypaihangOptions).some(value => value)) {
-        passFilter = passFilter && this.selectedAcitypaihangOptions[item.Acitypaihang];
       }
 
       return passFilter;
     });
 
-    // 根据输入的分数进行筛选
+    // Filter based on score input
     this.filterByScore();
 
-    // 更新显示的数据
+    // Update total pages based on filtered data
+    this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
+
+    // Reset current page to 1 if it exceeds the total pages
+    if (this.currentPage > this.totalPages) {
+      this.currentPage = 1;
+    }
+
+    // Update displayed data
     this.displayedColumns = this.filteredData.slice(
       (this.currentPage - 1) * this.itemsPerPage,
       this.currentPage * this.itemsPerPage
     );
-    this.saveFilterOptions(); // 保存筛选选项
-
-    this.goToPage(1); // 添加此行代码
   }
+
+
+
 
 
   filterByScore() {
@@ -204,6 +219,9 @@ selectedAcitypaihangOptions: { [key: string]: boolean } = {};
       this.selectedAshengfenOptions[this.Ashengfen] = true;
       this.selectedAcityOptions[this.Acity] = true;
       this.selectedAcitypaihangOptions[this.Acitypaihang] = true;
+
+      // 重新应用筛选器
+      this.applyFilter();
     }
   }
 
@@ -216,6 +234,8 @@ selectedAcitypaihangOptions: { [key: string]: boolean } = {};
     this.selectedAcityOptions = {};
     this.selectedAcitypaihangOptions = {};
     this.inputScore = 0;
-    this.applyFilter();
+    this.updatePages(); // 添加此行
+    this.getDisplayedColumns(); // 添加此行
   }
+
 }

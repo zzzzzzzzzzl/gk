@@ -37,12 +37,7 @@
     margin-right: 5px;
   }
 
-  /* 分页按钮样式 */
-  .pagination {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-  }
+ 
 
   .pagination button {
     border: none;

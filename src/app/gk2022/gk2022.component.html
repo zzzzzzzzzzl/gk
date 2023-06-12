@@ -1,56 +1,51 @@
-<h2>筛选</h2>
+<label for="axuankeyaoqiu">选课要求:</label>
+<div class="horizontal-options">
+  <div *ngFor="let option of AxuankeyaoqiuOptions">
+    <input type="checkbox" id="axuankeyaoqiu-{{ option }}" [(ngModel)]="selectedAxuankeyaoqiuOptions[option]" (change)="applyFilter()">
+    <label for="axuankeyaoqiu-{{ option }}">{{ option }}</label>
+  </div>
+</div>
+
 <div>
-  <!-- 筛选选项 -->
-  <div>
-    <!-- 筛选选项 -->
-    <label for="axuankeyaoqiu">选课要求:</label>
-    <div class="horizontal-options">
-      <div *ngFor="let option of AxuankeyaoqiuOptions">
-        <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAxuankeyaoqiuOptions[option]" (change)="applyFilter()">
-        <label for="{{ option }}">{{ option }}</label>
-      </div>
-    </div>
-
-
   <label for="acengci">层次:</label>
   <div class="horizontal-options">
     <div *ngFor="let option of AcengciOptions">
-      <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAcengciOptions[option]" (change)="applyFilter()">
-      <label for="{{ option }}">{{ option }}</label>
+      <input type="checkbox" id="acengci-{{ option }}" [(ngModel)]="selectedAcengciOptions[option]" (change)="applyFilter()">
+      <label for="acengci-{{ option }}">{{ option }}</label>
     </div>
   </div>
+</div>
 
-
+<div>
   <label for="ashengfen">省份:</label>
   <div class="horizontal-options">
     <div *ngFor="let option of AshengfenOptions">
-      <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAshengfenOptions[option]" (change)="applyFilter()">
-      <label for="{{ option }}">{{ option }}</label>
+      <input type="checkbox" id="ashengfen-{{ option }}" [(ngModel)]="selectedAshengfenOptions[option]" (change)="applyFilter()">
+      <label for="ashengfen-{{ option }}">{{ option }}</label>
     </div>
   </div>
+</div>
 
-
-
+<div>
   <label for="acity">城市:</label>
-<div class="horizontal-options">
-  <div *ngFor="let option of AcityOptions">
-    <input type="checkbox" id="{{ option }}" [(ngModel)]="selectedAcityOptions[option]" (change)="applyFilter()">
-    <label for="{{ option }}">{{ option }}</label>
+  <div class="horizontal-options">
+    <div *ngFor="let option of AcityOptions">
+      <input type="checkbox" id="acity-{{ option }}" [(ngModel)]="selectedAcityOptions[option]" (change)="applyFilter()">
+      <label for="acity-{{ option }}">{{ option }}</label>
+    </div>
   </div>
 </div>
 
-<!-- Existing code... -->
 
-<div class="input-score">
-  <label for="score">请输入分数：</label>
-  <input type="number" id="score" [(ngModel)]="inputScore" (change)="applyFilter()" />
-</div>
+  <div class="input-score">
+    <label for="score">请输入分数：</label>
+    <input type="number" id="score" [(ngModel)]="inputScore" (change)="applyFilter()" />
+  </div>
 
-
-<!-- Existing code... -->
 <div class="pagination">
   <button *ngFor="let page of pages" (click)="goToPage(page)">{{ page }}</button>
 </div>
+
 
 
 <table>
@@ -84,6 +79,8 @@
         <th>专业名称</th>
       </tr>
 
+
+      <ng-container *ngIf="combinedColumns.length > 0">
   <tr *ngFor="let item of displayedColumns">
     <td>{{ item.Amenlei }}</td>
     <td>{{ item.Azhuanyeleibie }}</td>
@@ -112,7 +109,8 @@
     <td>{{ item.Acengcitedian }}</td>
     <td>{{ item.Ajihuashu }}</td>
     <td>{{ item.Azhuanyemingcheng }}</td>
-  </tr>
+  </tr></ng-container>
+
 </table>
 
 
