@@ -1,19 +1,68 @@
-<!-- <h1>查询表格</h1>
-<form id="queryForm">
-  <label for="id">ID:</label>
-  <input type="text" id="id" name="id">
-  <button type="button" (click)="submitForm()">查询</button>
-</form> -->
+<!DOCTYPE html>
+<html>
 
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+    }
 
-<div class="menu-container">
-  <a routerLink="/meniu" class="menu-button">信息</a>
-  <a routerLink="/gao-kao" class="menu-button">分数匹配</a>
-  <a routerLink="/chaxun" class="menu-button">学校查询</a>
-  <a routerLink="/gk2022" class="menu-button">总查询</a>
+    .bannan {
+      background-color: #FF7F50;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
 
-</div>
+    .bannan h1 {
+      font-size: 40px;
+      margin: 0;
+    }
 
-<div class="content-container">
-  <router-outlet></router-outlet>
-</div>
+    .menu-container {
+      background-color: #5c5c5c;
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+    }
+
+    .menu-button {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 20px;
+      transition: transform 0.3s ease;
+      border-radius: 0;
+    }
+
+    .menu-button:hover {
+      background-color: #e07657;
+      transform: scale(1.1);
+    }
+
+    .content-container {
+      padding: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bannan">
+    <h1>高考查询</h1>
+  </div>
+
+  <div class="menu-container">
+    <a routerLink="/meniu" class="menu-button">信息</a>
+    <a routerLink="/gao-kao" class="menu-button">分数匹配</a>
+    <a routerLink="/chaxun" class="menu-button">学校查询</a>
+    <a routerLink="/gk2022" class="menu-button">总查询</a>
+  </div>
+
+  <div class="content-container">
+    <router-outlet></router-outlet>
+  </div>
+</body>
+
+</html>

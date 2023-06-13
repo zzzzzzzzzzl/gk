@@ -2,13 +2,9 @@
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+const cors = require('cors');
 
+app.use(cors());
 
 // 创建数据库连接
 const connection = mysql.createConnection({
@@ -25,6 +21,7 @@ connection.connect((error) => {
     return;
   }
   console.log('成功连接到数据库！');
+
 });
 
 

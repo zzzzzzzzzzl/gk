@@ -1,87 +1,113 @@
-
-  /* 表格样式 */
-  .table-container {
-    width: 100%;
-    overflow-x: auto;
-    margin-bottom: 20px;
-  }
-
-  table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-  }
-
-  th {
-    background-color: #f2f2f2;
-  }
-
-  /* 筛选样式 */
-  h2 {
-    margin-top: 20px;
-  }
-
-  .horizontal-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .horizontal-options label {
-    margin-right: 5px;
-  }
-
-
-
-  .pagination button {
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    padding: 10px 15px;
-    margin-right: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .pagination button:last-child {
-    margin-right: 0;
-  }
-
-  .pagination button:hover {
-    background-color: #0056b3;
-  }
-/* 筛选样式 */
-.horizontal-options {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.horizontal-options label {
-  margin-right: 5px;
-}
-
-table {
-  font-size: 12px;
-}
-
-th, td {
-  font-size: 10px;
-}
-
-.compact-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
 }
 
 .compact-label {
-  margin-left: 5px;
+  color: #333;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.horizontal-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.compact-options {
+  margin-top: 10px;
+}
+
+.compact-options input[type="checkbox"] {
+  display: none;
+}
+
+.compact-options label {
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.compact-options label:hover {
+  background-color: #ff9900;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.compact-options input[type="checkbox"]:checked + label {
+  background-color: #ff9900;
+  color: #fff;
+}
+
+.input-score {
+  margin-top: 20px;
+}
+
+.input-score label {
+  color: #333;
+  font-size: 16px;
+}
+
+.input-score input[type="number"] {
+  padding: 8px;
+  font-size: 16px;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.pagination button {
+  display: inline-block;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.pagination button:hover {
+  background-color: #ff9900;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.table-row {
+  display: flex;
+  align-items: center;
+  background-color: #F7F7F7;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.table-cell {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.orange-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #FFB74D;
+  color: #FFFFFF;
+  transition: background-color 0.3s ease;
+}
+
+.orange-button:hover {
+  background-color: #FF9800;
 }
