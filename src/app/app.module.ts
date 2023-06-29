@@ -14,6 +14,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { XxZyComponent } from './xx-zy/xx-zy.component';
 import { Gk2022Component } from './gk2022/gk2022.component';
 import { ChaxunModule } from './chaxun/chaxun.module';
+import { BKZNComponent } from './bkzn/bkzn.component';
+import { ZxzxComponent } from './zxzx/zxzx.component';
+import { ZSDTComponent } from './zsdt/zsdt.component';
+import { GGYLComponent } from './ggyl/ggyl.component';
+import { SubmenuComponent } from './submenu/submenu.component';
+import { Mokuai1Component } from './mokuai1/mokuai1.component';
 
 
 
@@ -37,6 +43,12 @@ import { ChaxunModule } from './chaxun/chaxun.module';
     ChaxunComponent,
     XxZyComponent,
     Gk2022Component,
+    BKZNComponent,
+    ZxzxComponent,
+    ZSDTComponent,
+    GGYLComponent,
+    SubmenuComponent,
+    Mokuai1Component,
   ],
 
 

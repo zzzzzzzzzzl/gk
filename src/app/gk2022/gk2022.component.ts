@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import { HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-gk2022',
   templateUrl: './gk2022.component.html',

@@ -1,65 +1,44 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f7f7f7;
-    }
-
-    .bannan {
-      background-color: #FF7F50;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .bannan h1 {
-      font-size: 40px;
-      margin: 0;
-    }
-
-    .menu-container {
-      background-color: #5c5c5c;
-      display: flex;
-      justify-content: space-around;
-      padding: 20px;
-    }
-
-    .menu-button {
-      color: #fff;
-      text-decoration: none;
-      padding: 10px 20px;
-      transition: transform 0.3s ease;
-      border-radius: 0;
-    }
-
-    .menu-button:hover {
-      background-color: #e07657;
-      transform: scale(1.1);
-    }
-
-    .content-container {
-      padding: 20px;
-    }
-  </style>
-</head>
-
 <body>
   <div class="bannan">
     <h1>高考查询</h1>
   </div>
 
-  <div class="menu-container">
-    <a routerLink="/meniu" class="menu-button">信息</a>
-    <a routerLink="/gao-kao" class="menu-button">分数匹配</a>
-    <a routerLink="/chaxun" class="menu-button">学校查询</a>
-    <a routerLink="/gk2022" class="menu-button">总查询</a>
-  </div>
 
+  <div class="menu-container">
+    <a routerLink="/meniu" class="menu-button" (mouseenter)="onMouseEnter('资讯')" (mouseleave)="onMouseLeave()">高考资讯</a>
+    <a routerLink="/bkzn" class="menu-button" (mouseenter)="onMouseEnter('指南')" (mouseleave)="onMouseLeave()">报考指南</a>
+    <a routerLink="/zsdt" class="menu-button" (mouseenter)="onMouseEnter('动态')" (mouseleave)="onMouseLeave()">招生动态</a>
+    <a routerLink="/zxzx" class="menu-button" (mouseenter)="onMouseEnter('咨询')" (mouseleave)="onMouseLeave()">在线咨询</a>
+    <a routerLink="/gao-kao" class="menu-button" >分数匹配</a>
+    <a routerLink="/chaxun" class="menu-button" >学校查询</a>
+    <a routerLink="/gk2022" class="menu-button" >总查询</a>
+    <a routerLink="/xx-zy" class="menu-button" >高考月历</a>
+
+<div class="submenu" [ngClass]="{'active': showSubmenu !== ''}" (mouseenter)="onMouseEnterSubmenu()" (mouseleave)="onMouseLeaveSubmenu()">
+      <div class="submenu-content" >
+        <button *ngIf="showSubmenu === '资讯' "routerLink="/meniu">专业列表</button>
+        <button *ngIf="showSubmenu === '资讯' "routerLink="xx-zy/:id">专业介绍</button>
+        <button *ngIf="showSubmenu === '资讯'">选项1.2</button>
+
+        <button *ngIf="showSubmenu === '指南'">选项2</button>
+        <button *ngIf="showSubmenu === '指南'">选项2.2</button>
+        <button *ngIf="showSubmenu === '指南'">选项2.2</button>
+
+        <button *ngIf="showSubmenu === '动态'">选项3</button>
+        <button *ngIf="showSubmenu === '动态'">选项3</button>
+        <button *ngIf="showSubmenu === '动态'">选项3</button>
+
+
+        <button *ngIf="showSubmenu === '咨询'">选项4</button>
+        <button *ngIf="showSubmenu === '咨询'">选项4</button>
+        <button *ngIf="showSubmenu === '咨询'">选项4</button>
+
+      </div>
+    </div>
+  </div>
+  <br>
   <div class="content-container">
     <router-outlet></router-outlet>
   </div>

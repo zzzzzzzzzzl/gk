@@ -4,11 +4,29 @@ const mysql = require('mysql');
 const app = express();
 const cors = require('cors');
 
+
+
+
+app.all('*', function(req, response, next) {
+    //设置允许跨域的域名，*代表允许任意域名跨域
+    response.header("Access-Control-Allow-Origin", "*");
+    //允许的header类型
+    response.header("Access-Control-Allow-Headers", "X-Requested-With");
+    //跨域允许的请求方式
+    response.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    //设置响应头信息
+    response.header("X-Powered-By",' 3.2.1')
+    response.header("Content-Type", "application/json;charset=utf-8");
+
+    next();
+
+});
+
 app.use(cors());
 
 // 创建数据库连接
 const connection = mysql.createConnection({
-  host: 'localhost',
+  host: '192.168.2.114',
   user: 'root',
   password: '',
   database: 'gk'

@@ -12,6 +12,7 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 
 export class MeniuComponent {
+  
   gakous: Gakou[] = [];
   getGakouNames(): string {
     this.gakous = Gakoues;

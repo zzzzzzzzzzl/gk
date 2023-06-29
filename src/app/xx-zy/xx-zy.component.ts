@@ -151,6 +151,12 @@ export class XxZyComponent {
 
   selectedSubject: string = '';
 
+
+  ngOnInit() {
+    this.selectedSubject = '哲学';
+    this.onSubjectClick('哲学');
+  }
+
   onSubjectClick(subject: string) {
     this.selectedSubject = subject;
   }

@@ -17,6 +17,9 @@ const routes: Routes = [
   { path: 'detail/:id', component: XxZyComponent },
   { path: 'gk2022', component: Gk2022Component },
   { path: 'filteredchaxun', component: Gk2022Component },
+  { path: 'meiniu1', component: MeniuComponent },
+
+
   // 其他路由规则...
 
 ];
